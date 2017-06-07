@@ -28,12 +28,12 @@ echo "Starting the docker bootstrap service"
 systemctl start docker-bootstrap.service
 
 echo "Pulling necessary etcd Docker image"
-docker -H unix:///var/run/docker-bootstrap.sock pull andrewpsuedonym/etcd:2.1.1
+docker -H unix:///var/run/docker-bootstrap.sock pull gcr.io/google_containers/etcd-arm:2.2.5
 echo "Starting the etcd service"
 systemctl start k8s-etcd.service
 
 echo "Pulling necessary flannel Docker image"
-docker -H unix:///var/run/docker-bootstrap.sock pull andrewpsuedonym/flanneld
+docker -H unix:///var/run/docker-bootstrap.sock pull quay.io/coreos/flannel:v0.7.1-arm
 echo "Starting the flannel service"
 systemctl start k8s-flannel.service
 
@@ -41,7 +41,7 @@ echo "Starting the docker service"
 systemctl start docker.service
 
 echo "Pulling necessary hyperkube Docker image"
-docker pull gcr.io/google_containers/hyperkube-arm:v1.1.2
+docker pull gcr.io/google_containers/hyperkube-arm:v1.5.7
 echo "Starting the kubernetes master service"
 systemctl start k8s-master.service
 
